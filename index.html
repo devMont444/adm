@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mural de Atividades Compartilhadas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header class="panel-header">
+      <h1>Mural de Atividades</h1>
+      <p>Envie sua contribuição e veja as atividades da turma abaixo.</p>
+    </header>
+
+    <main class="panel-content">
+      <form id="formAtividade" class="activity-form">
+        <div class="form-group">
+          <label for="estudanteId">Seu Nome / Identificação (Opcional)</label>
+          <input type="text" id="estudanteId" placeholder="Ex: João Silva ou Anônimo">
+        </div>
+
+        <div class="form-group">
+          <label for="tituloAtividade">Título da Atividade</label>
+          <input type="text" id="tituloAtividade" placeholder="Ex: Maquete de História" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descricaoAtividade">Descrição / Comentários</label>
+          <textarea id="descricaoAtividade" rows="3" placeholder="Explique brevemente o que é esta atividade..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="linkArquivo">Link do Arquivo ou Trabalho</label>
+          <input type="url" id="linkArquivo" placeholder="Ex: https://drive.google.com/..." required>
+        </div>
+
+        <button type="submit" class="btn-submit">Publicar no Mural</button>
+      </form>
+
+      <div id="statusMensagem" class="status-box"></div>
+
+      <hr class="divisor">
+
+      <section class="historico-section">
+        <h2>Atividades Publicadas</h2>
+        <div id="listaAtividades" class="lista-atividades">
+          <p class="nenhuma-atividade">Carregando mural de atividades...</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
