@@ -90,14 +90,14 @@ async function carregarAtividades() {
       const card = document.createElement('div');
       card.className = 'card-atividade';
       card.innerHTML = `
-        <div class="card-header">
-          <h3>${atividade.titulo}</h3>
-          <span class="data-envio">${dataFormatada}</span>
-        </div>
-        <p class="autor-atv"><strong>Por:</strong> ${atividade.alunos_id || 'Anônimo'}</p>
-        <p class="card-desc">${atividade.descricao || '<em>Sem descrição.</em>'}</p>
-        <a href="${atividade.link_arquivo}" target="_blank" class="link-entrega">📁 Abrir Atividade</a>
-      `;
+  <div class="card-header">
+    <h3>${atividade.titulo}</h3>
+    <span class="data-envio">${dataFormatada}</span>
+  </div>
+  <p class="autor-atv"><strong>Por:</strong> ${atividade.alunos_id || 'Anônimo'}</p>
+  <p class="card-desc">${atividade.descricao || '<em>Sem descrição.</em>'}</p>
+  <a href="${atividade.link_arquivo}" target="_blank" class="link-entrega">🔗 Acessar Trabalho</a>
+`;
       listaContainer.appendChild(card);
     });
   } catch (error) {
