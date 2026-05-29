@@ -6,12 +6,35 @@
     <title>AVA Reverso - Mural</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --bg-black: #000000;
+            --card-black: #0a0a0a;
+            --blue-neon: #00e5ff; /* Azul super destacado */
+            --blue-glow: rgba(0, 229, 255, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border-color: #1a1a1a;
+        }
+
+        /* Customização da Barra de Rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue-neon);
+            border-radius: 4px;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117; /* Fundo Preto */
-            color: #f0f6fc; /* Texto Claro */
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -20,135 +43,201 @@
         }
 
         header {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
         }
 
         header h1 {
-            color: #3b82f6; /* Azul em destaque */
+            color: var(--blue-neon);
+            font-size: 2.5rem;
             margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--blue-glow); /* Efeito de brilho */
         }
 
         header p {
-            color: #8b949e;
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
         }
 
         form {
-            background: #161b22; /* Card Cinza Escuro */
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin-bottom: 40px;
+            background: var(--card-black);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px var(--blue-glow) inset;
+            margin-bottom: 50px;
+            transition: all 0.3s ease;
+        }
+
+        form:hover {
+            border-color: var(--blue-neon);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
+            color: var(--blue-neon);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        input[type="text"], input[type="url"], textarea {
+        input[type="text"], textarea {
             width: 100%;
-            padding: 12px;
-            background-color: #0d1117;
-            border: 1px solid #30363d;
-            color: #f0f6fc;
-            border-radius: 6px;
+            padding: 14px;
+            background-color: #050505;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 8px;
             box-sizing: border-box;
             font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: #3b82f6; /* Borda Azul ao focar */
+            border-color: var(--blue-neon);
+            box-shadow: 0 0 12px var(--blue-glow);
+            background-color: #000000;
         }
 
         textarea {
             resize: vertical;
-            height: 80px;
+            height: 100px;
+        }
+
+        /* Área de texto maior para o trabalho final */
+        #textoTrabalho {
+            height: 150px;
         }
 
         button {
             width: 100%;
-            background-color: #3b82f6; /* Botão Azul */
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
+            background-color: transparent;
+            color: var(--blue-neon);
+            padding: 16px;
+            border: 2px solid var(--blue-neon);
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--blue-glow);
         }
 
         button:hover {
-            background-color: #2563eb;
+            background-color: var(--blue-neon);
+            color: var(--bg-black);
+            box-shadow: 0 0 20px var(--blue-neon);
         }
 
         #statusMensagem {
             text-align: center;
-            margin-top: 15px;
-            font-weight: 500;
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         h2 {
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 10px;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: "•";
+            color: var(--blue-neon);
+            text-shadow: 0 0 10px var(--blue-neon);
         }
 
         #listaAtividades {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .card-atividade {
-            background: #161b22;
-            padding: 20px;
+            background: var(--card-black);
+            padding: 25px;
             border-radius: 12px;
-            border: 1px solid #30363d;
-            border-left: 5px solid #3b82f6;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--blue-neon);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
 
         .card-header h3 {
             margin: 0;
-            color: #3b82f6;
+            color: var(--blue-neon);
+            font-size: 1.3rem;
+            text-shadow: 0 0 5px var(--blue-glow);
         }
 
         .data-envio {
             font-size: 12px;
-            color: #8b949e;
+            color: var(--text-muted);
+            background: #111;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
         }
 
-        .link-entrega {
-            display: inline-block;
-            background-color: #21262d;
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 600;
-            border: 1px solid #30363d;
+        .autor-atv {
+            font-size: 0.9rem;
+            margin: 0 0 15px 0;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para sobrepor o cinza do JavaScript anterior e forçar a cor preta */
+        .texto-entrega {
+            background-color: #050505 !important;
+            color: #e0e0e0 !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            padding: 15px !important;
+            font-family: monospace;
+            font-size: 0.9rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -156,39 +245,38 @@
 
     <header>
         <h1>AVA Reverso</h1>
-        <p>Enviar link da atividade ou trabalho</p>
+        <p>Compartilhe o texto da sua atividade no mural</p>
     </header>
 
     <div class="container">
         <form id="formAtividade">
             <div class="form-group">
-                <label for="estudanteId">Seu Nome / Registro</label>
-                <input type="text" id="estudanteId" placeholder="Ex: João Silva ou Seu RM" required>
+                <label for="estudanteId">Nome do Estudante</label>
+                <input type="text" id="estudanteId" placeholder="Ex: João Silva ou RM" required>
             </div>
 
             <div class="form-group">
-                <label for="tituloAtividade">Título do Projeto</label>
-                <input type="text" id="tituloAtividade" placeholder="Ex: Exercício de JavaScript, API Rest" required>
+                <label for="tituloAtividade">Título da Atividade</label>
+                <input type="text" id="tituloAtividade" placeholder="Ex: Redação, Código, Ensaio..." required>
             </div>
 
             <div class="form-group">
                 <label for="descricaoAtividade">Descrição Breve (Opcional)</label>
-                <textarea id="descricaoAtividade" placeholder="Conte um pouco sobre as tecnologias que usou..."></textarea>
+                <textarea id="descricaoAtividade" placeholder="Contexto ou tecnologias usadas..."></textarea>
             </div>
 
             <div class="form-group">
-                <label for="linkArquivo">link da atividade</label>
-                <input type="url" id="linkArquivo" placeholder="https://seu-site.com/atividade" required>
+                <label for="textoTrabalho">Texto do Trabalho</label>
+                <textarea id="textoTrabalho" placeholder="Cole todo o texto do seu trabalho ou código aqui..." required></textarea>
             </div>
 
-            <button type="submit">Enviar Atividade</button>
+            <button type="submit">Publicar no Mural</button>
             <div id="statusMensagem"></div>
         </form>
 
-        <h2>Mural de Atividades</h2>
+        <h2>Mural de Trabalhos</h2>
         <div id="listaAtividades"></div>
     </div>
 
     <script src="./app.js"></script>
 </body>
-</html>

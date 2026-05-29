@@ -17,7 +17,9 @@ async function enviarAtividade(evento) {
   const estudanteId = document.getElementById('estudanteId').value.trim() || 'Anônimo';
   const titulo = document.getElementById('tituloAtividade').value;
   const descricao = document.getElementById('descricaoAtividade').value;
-  const linkArquivo = document.getElementById('linkArquivo').value;
+  
+  // 🟢 Capturando o TEXTO em vez do LINK
+  const textoTrabalho = document.getElementById('textoTrabalho').value;
 
   const statusMensagem = document.getElementById('statusMensagem');
   statusMensagem.style.color = "#8b949e"; 
@@ -31,7 +33,7 @@ async function enviarAtividade(evento) {
           alunos_id: estudanteId, 
           titulo: titulo, 
           descricao: descricao, 
-          link_arquivo: linkArquivo 
+          texto_trabalho: textoTrabalho // 🟢 Nome da coluna alterado no banco
         }
       ]);
 
@@ -57,7 +59,6 @@ async function enviarAtividade(evento) {
   }
 }
 
-// 3. Função para BUSCAR as atividades direto do Supabase
 // 3. Função para BUSCAR as atividades direto do Supabase
 async function carregarAtividades() {
   const listaContainer = document.getElementById('listaAtividades');
@@ -89,15 +90,20 @@ async function carregarAtividades() {
 
       const card = document.createElement('div');
       card.className = 'card-atividade';
+      
+      // 🟢 Exibindo o texto de forma formatada em vez do Link
       card.innerHTML = `
-  <div class="card-header">
-    <h3>${atividade.titulo}</h3>
-    <span class="data-envio">${dataFormatada}</span>
-  </div>
-  <p class="autor-atv"><strong>Por:</strong> ${atividade.alunos_id || 'Anônimo'}</p>
-  <p class="card-desc">${atividade.descricao || '<em>Sem descrição.</em>'}</p>
-  <a href="${atividade.link_arquivo}" target="_blank" class="link-entrega">🔗 Acessar Trabalho</a>
-`;
+        <div class="card-header">
+          <h3>${atividade.titulo}</h3>
+          <span class="data-envio">${dataFormatada}</span>
+        </div>
+        <p class="autor-atv"><strong>Por:</strong> ${atividade.alunos_id || 'Anônimo'}</p>
+        <p class="card-desc">${atividade.descricao || '<em>Sem descrição.</em>'}</p>
+        <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+        <div class="texto-entrega" style="white-space: pre-wrap; background: #f6f8fa; padding: 10px; border-radius: 5px;">
+          ${atividade.texto_trabalho || '<em>Nenhum texto enviado.</em>'}
+        </div>
+      `;
       listaContainer.appendChild(card);
     });
   } catch (error) {
